@@ -2,7 +2,7 @@ import requests
 
 class ConvexApi:
     def __init__(self, email, password, kind = ''):
-        self.data_routes = "/api/v8/alloy"
+        # self.data_routes = "/api/v8/alloy"
 
         if kind == 'pro':
             self.base_url = f"https://pro.convexvalue.com"
@@ -26,13 +26,17 @@ class ConvexApi:
             print(f"Login failed with status code: {response.status_code}")
             response.raise_for_status()
 
+    def get_und(self,symbols,params):
+        data = {"symbols":symbols,"params":params}
+        return self.make_request(endpoint="/api/v8/alloy/core/data/und",method="POST",data=data)
+
     def make_request(self, endpoint, method="GET", data=None):
-        url = f"{self.base_url}/{endpoint}"
+        url = f"{self.base_url}{endpoint}"
 
         if method == "GET":
             response = self.session.get(url)
         elif method == "POST":
-            response = self.session.post(url, data=data)
+            response = self.session.post(url, json=data)
         # Add more methods as needed
 
         response.raise_for_status()
