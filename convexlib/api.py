@@ -1,12 +1,12 @@
 import requests
 
 class ConvexApi:
-    def __init__(self, email, password, kind = ''):
+    def __init__(self, email, password, kind = ""):
         # self.data_routes = "/api/v8/alloy"
 
-        if kind == 'pro':
+        if kind == "pro":
             self.base_url = f"https://pro.convexvalue.com"
-        if kind == 'live':
+        elif kind == "live":
             self.base_url = f"https://live.convexvalue.com"
         else:
             self.base_url = f"https://convexvalue.com"
