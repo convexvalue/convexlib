@@ -27,8 +27,17 @@ class ConvexApi:
             response.raise_for_status()
 
     def get_und(self,symbols,params):
-        data = {"symbols":symbols,"params":params}
+        data = {"symbols":symbols,"params":params,"limit":0}
         return self.make_request(endpoint="/api/v8/alloy/core/data/und",method="POST",data=data)
+
+    def get_chain(self,root,params,exps = None, rng = None):
+        data = {
+            "symbols":[root],
+            "params":params,
+            "exps": exps,
+            "rng": rng
+        }
+        return self.make_request(endpoint="/api/v8/alloy/core/data/chain",method="POST",data=data)
 
     def make_request(self, endpoint, method="GET", data=None):
         url = f"{self.base_url}{endpoint}"
