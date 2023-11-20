@@ -23,6 +23,11 @@ und_data = convex_instance.get_und(symbols=["SPX","AAPL"],params=["price","value
 
 # requesting option chain
 chain = convex_instance.get_chain("AAPL",params=["volm_bs","volatility"],exps=[1,2,3],rng=0.10)
+
+# requesting option chain as rows
+rows = convex_instance.get_chain_as_rows("AAPL",params=["volm_bs","volatility"],exps=[1,2,3],rng=0.10)
+# response
+# [symbol,expiration,strike,kind,...params]
 ```
 
 

@@ -39,6 +39,26 @@ class ConvexApi:
         }
         return self.make_request(endpoint="/api/v8/alloy/core/data/chain",method="POST",data=data)
 
+    def get_chain_as_rows(self,root,params,exps = None, rng = None):
+        res = self.get_chain(root,params,exps,rng)
+        rows = []
+        for element in res['data'][0]['chain']:
+            exp = element['exp'];
+            am = element['am'];
+            for value in element['stks']:
+                callitem = [value['call'][0],exp,value['stk'],'call']
+                for v in value['call'][1]:
+                    callitem.append(v)
+
+                putitem = [value['put'][0],exp,value['stk'],'put']
+                for v in value['put'][1]:
+                    putitem.append(v)
+
+                rows.append(callitem)
+                rows.append(putitem)
+
+        return rows
+
     def make_request(self, endpoint, method="GET", data=None):
         url = f"{self.base_url}{endpoint}"
 

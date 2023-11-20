@@ -31,5 +31,10 @@ class TestConvexLib(unittest.TestCase):
         response_data = self.convex_instance.get_chain("AAPL",params=["volm_bs","volatility"],exps=[1,2,3],rng=0.10)
         print(response_data)
 
+    def test_get_chain_as_rows(self):
+        # get_chain(self,root,params,exps = undefined, rng = undefined):
+        response_data = self.convex_instance.get_chain_as_rows("AAPL",params=["volm_bs","volatility"],exps=[2,3],rng=0.3)
+        print(response_data)
+
 if __name__ == '__main__':
     unittest.main()
